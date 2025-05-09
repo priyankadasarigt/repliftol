@@ -3,6 +3,11 @@ import asyncio
 import logging
 import traceback
 import logging.handlers as handlers
+
+# Added keep_alive import and call
+from keep_alive import keep_alive
+keep_alive()
+
 from FileStream.config import Telegram, Server
 from aiohttp import web
 from pyrogram import idle
@@ -35,12 +40,11 @@ async def start_services():
     print()
     print("-------------------- Initializing Telegram Bot --------------------")
 
-
     await FileStream.start()
     bot_info = await FileStream.get_me()
     FileStream.id = bot_info.id
     FileStream.username = bot_info.username
-    FileStream.fname=bot_info.first_name
+    FileStream.fname = bot_info.first_name
     print("------------------------------ DONE ------------------------------")
     print()
     print("---------------------- Initializing Clients ----------------------")
